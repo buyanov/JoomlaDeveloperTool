@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="3.0" method="upgrade">
+    <name>%{component_name_cap}</name>
+    <creationDate>%{creation_date}</creationDate>
+    <copyright>© 2014. Все права защищены.</copyright>
+    <license>GNU General Public License версии 2 или более поздней;</license>
+    <author>%{author_name}</author>
+    <authorEmail>%{author_email}</authorEmail>
+    <authorUrl>%{author_url}</authorUrl>
+    <version>1.0.0</version>
+    <description>%{component_desc}</description>
+    
+    <install> <!-- Runs on install -->
+        <sql>
+            <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+        </sql>
+    </install>
+    <uninstall> <!-- Runs on uninstall -->
+        <sql>
+            <file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+        </sql>
+    </uninstall>
+
+    <files folder="site">
+        <filename>index.html</filename>
+        <filename>%{component_name}.php</filename>
+        <filename>controller.php</filename>
+        <filename>router.php</filename>
+        <folder>views</folder>
+        <folder>models</folder>
+        <folder>controllers</folder>
+        <folder>helpers</folder>
+    </files>
+    <languages folder="site">
+        
+			<language tag="en-GB">language/en-GB.com_%{component_name}.ini</language>
+    </languages>
+    <administration>
+        XXX_XML_MENU_VIEW_START_AND_STOP_XXX
+        <submenu>
+            XXX_LOOP_XML_SUBMENU_VIEWS_START_AND_STOP_XXX
+        </submenu>
+        <files folder="administrator">
+            <filename>access.xml</filename>
+            <filename>config.xml</filename>
+            <filename>controller.php</filename>
+            <filename>index.html</filename>
+            <filename>%{component_name}.php</filename>
+            <folder>controllers</folder>
+            <folder>assets</folder>
+            <folder>helpers</folder>
+            <folder>models</folder>
+            <folder>sql</folder>
+            <folder>tables</folder>
+            <folder>views</folder>
+        </files>
+        <languages folder="administrator">
+ 			<language tag="en-GB">language/en-GB.com_%{component_name}.ini</language>
+			<language tag="en-GB">language/en-GB.com_%{component_name}.sys.ini</language>
+        </languages>
+    </administration>
+</extension>
