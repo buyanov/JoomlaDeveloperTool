@@ -9,6 +9,13 @@ import os
 import sys
 from jtools import utils
 
+def check_do_rewrite(t_path):
+    if os.path.exists(t_path):
+        do_rewrite = input('File exist. Rewrite? (Y/n) ')
+        if(do_rewrite != 'Y'):
+            return 0
+    return 1
+
 def getInstallXmlFromRoot():
     files = os.listdir(os.curdir)
     xmls = filter(lambda x: fnmatch.fnmatch(x,'com_*.xml'), files) 
@@ -75,6 +82,9 @@ def create_table(name, author, ToolConf):
 
     for t_file in os.listdir(src_dir):
         file_path = os.path.abspath(os.path.join(src_dir,t_file))
+        do_rewrite = check_do_rewrite(os.path.join(dst_dir, utils.remake_string(t_file, vars_dict)))
+        if not do_rewrite:
+            sys.exit()
         try:
             shutil.copy(file_path, dst_dir)
         except Exception as e:
@@ -110,6 +120,9 @@ def create_model(name, author, jclass, dst, ToolConf):
 
     for t_file in os.listdir(src_dir):
         file_path = os.path.abspath(os.path.join(src_dir,t_file))
+        do_rewrite = check_do_rewrite(os.path.join(dst_dir, utils.remake_string(t_file, vars_dict)))
+        if not do_rewrite:
+            sys.exit()
         try:
             shutil.copy(file_path, dst_dir)
         except Exception as e:
@@ -141,10 +154,18 @@ def create_view(name, author, dst, ToolConf):
     
     src_dir = os.path.abspath(os.path.join(ToolConf['mvc'],'view'))
     dst_dir = os.path.abspath(os.path.join(os.curdir,dst_folder,'views'))
-
+    
     for t_file in os.listdir(src_dir):
+        do_rewrite = check_do_rewrite(os.path.join(dst_dir, utils.remake_string(t_file, vars_dict)))
+        if not do_rewrite:
+            sys.exit()
         src_file_path = os.path.abspath(os.path.join(src_dir,t_file))
         dst_file_path = os.path.abspath(os.path.join(dst_dir,t_file))
+        
+        dst_remaked_name = utils.remake_string(dst_file_path, vars_dict)
+        if(os.path.exists(dst_remaked_name)):
+            shutil.rmtree(dst_remaked_name)
+        
         try:
             shutil.copytree(src_file_path, dst_file_path)
         except Exception as e:
@@ -180,6 +201,9 @@ def create_controller(name, author, jclass, dst, ToolConf):
 
     for t_file in os.listdir(src_dir):
         file_path = os.path.abspath(os.path.join(src_dir,t_file))
+        do_rewrite = check_do_rewrite(os.path.join(dst_dir, utils.remake_string(t_file, vars_dict)))
+        if not do_rewrite:
+            sys.exit()
         try:
             shutil.copy(file_path, dst_dir)
         except Exception as e:
