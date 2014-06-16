@@ -56,6 +56,7 @@ def create_component(name, author, description, ToolConf):
         shutil.copytree(src_dir, dst_dir)
     except Exception as e:
         print(e)
+    os.chdir(dst_dir)
     utils.remake_dir(os.curdir, vars_dict)
 
 def create_table(name, author, ToolConf):
