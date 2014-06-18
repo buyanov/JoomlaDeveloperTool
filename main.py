@@ -44,7 +44,7 @@ def get_tool_conf():
 def main():
     tool_conf = get_tool_conf()
 
-    parser = argparse.ArgumentParser(description="Joomla Developer Tool", epilog="Created by Rogachev Sergey", usage="%(prog)s [--init] | [--print] | [--create [options]]")
+    parser = argparse.ArgumentParser(description="Joomla Developer Tool", epilog="Created by Rogachev Sergey", usage="joomdevtool [--init] | [--print] | [--create [options]]")
     
     parser.add_argument("--init", "-i", \
                         const=True, \
