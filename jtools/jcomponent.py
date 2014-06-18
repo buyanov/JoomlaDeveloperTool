@@ -9,6 +9,11 @@ import os
 import sys
 from jtools import utils
 
+if sys.version_info < (3,0):
+    input = raw_input
+else:
+    input = input
+
 def check_do_rewrite(t_path):
     if os.path.exists(t_path):
         do_rewrite = input('File exist. Rewrite? (Y/n) ')
